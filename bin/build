@@ -13,9 +13,6 @@ source "${bpDir}/lib/common.sh"
 source "${bpDir}/lib/maven.sh"
 source "${bpDir}/lib/frameworks.sh"
 
-echo "include /app/lib" >> /etc/ld.so.conf
-/sbin/ldconfig -v
-
 export_env $ENV_DIR "." "JAVA_OPTS|JAVA_TOOL_OPTIONS"
 
 mavenLayerToml="$(bp_layer_metadata_create "false" "true" "false" "version=\"3.6.2\"")"
@@ -23,6 +20,8 @@ mavenLayer="$(bp_layer_init "$layersDir" "maven" "$mavenLayerToml")"
 
 run_mvn "compile" "$appDir" "$mavenLayer"
 remove_mvn "$appDir" "$mavenLayer"
+
+echo "include /app/lib" >> /etc/ld.so.conf
 
 if [ -d target ]; then
   for jarFile in $(find target -maxdepth 1 -name "*.jar" -type f); do
@@ -42,3 +41,5 @@ EOF
     break;
   done
 fi
+
+/sbin/ldconfig -v
