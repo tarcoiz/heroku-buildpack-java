@@ -27,7 +27,3 @@ install_jdk "${BUILD_DIR}" "${CACHE_DIR}"
 
 run_mvn "compile" $BUILD_DIR $CACHE_DIR
 remove_mvn $BUILD_DIR $CACHE_DIR
-
-mkdir -p ${PROFILE}
-touch ${PROFILE}/pdflib_setup.sh
-echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/app/lib" >> ${PROFILE}/pdflib_setup.sh
