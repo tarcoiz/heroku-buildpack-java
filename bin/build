@@ -21,8 +21,6 @@ mavenLayer="$(bp_layer_init "$layersDir" "maven" "$mavenLayerToml")"
 run_mvn "compile" "$appDir" "$mavenLayer"
 remove_mvn "$appDir" "$mavenLayer"
 
-echo "include /app/lib" >> /etc/ld.so.conf
-
 if [ -d target ]; then
   for jarFile in $(find target -maxdepth 1 -name "*.jar" -type f); do
     if is_spring_boot "$appDir"; then
@@ -42,4 +40,5 @@ EOF
   done
 fi
 
-/sbin/ldconfig -v
+echo "include /app/lib" >> /etc/ld.so.conf
+# /sbin/ldconfig
