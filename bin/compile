@@ -4,12 +4,15 @@
 # fail fast
 set -e
 
+echo "------> Buildpack setup by compile.sh"
+
 BPLOG_PREFIX="buildpack.java"
 
 BP_DIR=$(cd $(dirname $0)/..; pwd) # absolute path
 BUILD_DIR=$1
 CACHE_DIR=$2
 ENV_DIR=$3
+PROFILE=${BUILD_PATH}/.profile.d
 
 source $BP_DIR/lib/common.sh
 source $BP_DIR/lib/maven.sh
@@ -24,3 +27,7 @@ install_jdk "${BUILD_DIR}" "${CACHE_DIR}"
 
 run_mvn "compile" $BUILD_DIR $CACHE_DIR
 remove_mvn $BUILD_DIR $CACHE_DIR
+
+mkdir -p ${PROFILE}
+touch ${PROFILE}/pdflib_setup.sh
+echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/app/lib" >> ${PROFILE}/pdflib_setup.sh
