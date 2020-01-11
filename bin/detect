@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo "------> Configuring buildpack detect"
+
 if [ -n "${CNB_STACK_ID:-}" ]; then
   buildDir="$(pwd)"
   name="Maven"
