@@ -3,7 +3,7 @@
 # fail fast
 set -e
 
-echo "------> Buildpack setup by compile.sh"
+echo "------> Buildpack setup compile.sh"
 
 BPLOG_PREFIX="buildpack.java"
 
