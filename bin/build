@@ -40,5 +40,5 @@ EOF
   done
 fi
 
-echo "include /app/lib" >> /etc/ld.so.conf
+sudo echo "include /app/lib" >> /etc/ld.so.conf
 /sbin/ldconfig
